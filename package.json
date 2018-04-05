@@ -1,5 +1,5 @@
 {
-  "name": "appolo-lru",
+  "name": "appolo-cache",
   "description": "In memory lru cache",
   "keywords": [
     "cache",
