@@ -1,5 +1,5 @@
 {
-  "name": "rocket-lru",
+  "name": "appolo-lru",
   "description": "In memory lru cache",
   "keywords": [
     "cache",
@@ -20,24 +20,24 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/shmoop207/rocket-cache.git"
+    "url": "https://github.com/shmoop207/appolo-cache.git"
   },
   "readme": "",
   "readmeFilename": "README.md",
   "dependencies": {},
   "devDependencies": {
-    "@types/benchmark": "^1.0.30",
-    "@types/chai": "^4.0.4",
+    "@types/benchmark": "^1.0.31",
+    "@types/chai": "^4.1.2",
     "@types/lru-cache": "^4.1.0",
-    "@types/mocha": "^2.2.43",
+    "@types/mocha": "^5.0.0",
     "benchmark": "^2.1.4",
-    "chai": "^3.5.0",
-    "grunt": "1.0.1",
+    "chai": "^4.1.2",
+    "grunt": "1.0.2",
     "grunt-cli": "^1.2.0",
-    "grunt-mocha-test": "0.13.2",
-    "lru-cache": "^4.1.1",
-    "mocha": "^3.2.0",
+    "grunt-mocha-test": "0.13.3",
+    "lru-cache": "^4.1.2",
+    "mocha": "^5.0.5",
     "simple-lru-cache": "0.0.2",
-    "typescript": "^2.5.2"
+    "typescript": "^2.8.1"
   }
 }
