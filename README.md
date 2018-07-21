@@ -1,4 +1,4 @@
-# Rocket lru cache
+# Appolo lru cache
 Fast and simple lru cache for node.js written in typescript.
 
 The cache will remove the oldest used item when reached max capacity 
@@ -32,29 +32,48 @@ cache.reset();    // empty the cache
 
 
 ## API
-- `set(key, value, [maxAge])` - Set the value of the key and mark the key as most recently used.
+
+### `set(key, value, [maxAge])`
+Set the value of the key and mark the key as most recently used.
 if maxAge is passed the item will expire after maxAge ms.
-- `get(key) => value` - Return the value of the key. 
+### `get(key)`
+Return the value of the key.
 If the key is not found or expired  return `null`. 
 mark the key as most recently used.
-- `peek(key)` - return the value of the key 
+### `peek(key)`
+return the value of the key
 If the key is not found or expired  return `null`.
 will not update recently used.
-- `del(key)` - Deletes a key out of the cache.
-- `reset()` - Reset the cache and delete all items.
-- `has(key)` - Return true if a key is in the cache, will not update recently used
-- `forEach(function(value,key,cache), [this])` - Loop over the cache items
-- `keys()` - Return an array of the keys in the cache.
-- `values()` - Return an array of the values in the cache.
-- `size` Return the size of the cache.
-- `prune()` - Delete all expired items.
-- `pop()` - Remove and return the least recently used
-- `maxAge` - Update cache max age. 
-- `maxSize` - Update cache max size.
-- `maxSize` - Update cache max size.
-- `hit(key)` - Mark the key as most recently used.
-- `ttl(key)` - Get the ttl time left of the key item.
-- `expire(key,maxAge)` - Update the expire time of the key item.
+### `del(key)`
+Deletes a key out of the cache.
+### `reset()`
+Reset the cache and delete all items.
+### `has(key)`
+Return true if a key is in the cache, will not update recently used
+### `forEach(function(value,key,cache), [this])`
+Loop over the cache items
+### `keys()`
+Return an array of the keys in the cache.
+### `values()`
+Return an array of the values in the cache.
+### `size`
+Return the size of the cache.
+### `prune()`
+Delete all expired items.
+### `pop()`
+Remove and return the least recently used
+### `maxAge`
+getter setter cache max age.
+### `maxSize`
+getter setter cache max size.
+### `maxSize`
+getter setter cache max size.
+### `hit(key)`
+Mark the key as most recently used.
+### `ttl(key)`
+Get the ttl time left of the key item.
+### `expire(key,maxAge)`
+Update the expire time of the key item.
 
 ## License
 MIT
