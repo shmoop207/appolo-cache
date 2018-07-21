@@ -5,13 +5,13 @@ The cache will remove the oldest used item when reached max capacity
 ## Installation:
 
 ```javascript
-npm install rocket-lru --save
+npm install appolo-cache --save
 ```
 
 ## Usage:
 
 ```javascript
-import {Cache} from "rocket-lru";
+import {Cache} from "appolo-cache";
  
 //max items in cache is 5 and all the items will expire after 1 second
  let cache  = new Cache<string,string>({maxSize:5,maxAge:1000})
