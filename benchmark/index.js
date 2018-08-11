@@ -1,14 +1,14 @@
 'use strict';
 Object.defineProperty(exports, "__esModule", { value: true });
 const benchmark = require("benchmark");
-const _1 = require("../");
+const __1 = require("../");
 const LRU = require("lru-cache");
 const Simple = require("simple-lru-cache");
 let suite = new benchmark.Suite();
 let lru1Counter = 0;
 let lru2Counter = 0;
 // SET
-let cache1 = new _1.Cache({
+let cache1 = new __1.Cache({
     maxSize: 1000, maxAge: 10000
 });
 let lru1 = new LRU({
@@ -21,7 +21,7 @@ suite.add('lru set', function () {
     lru1.set('key' + (lru1Counter++), 'value');
 });
 // GET and PEEK
-let cache2 = new _1.Cache({
+let cache2 = new __1.Cache({
     maxSize: 1000
 });
 let lru2 = new LRU({

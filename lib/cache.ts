@@ -37,6 +37,37 @@ export class Cache<K, T> {
         return this._get(key, true, false) as ListItem<K, T>
     }
 
+    public getByExpire(key: K, expire?: number): { value: T, validExpire: boolean } {
+        return this._getByExpire(key, expire, "getItem");
+    }
+
+    public peekByExpire(key: K, expire?: number): { value: T, validExpire: boolean } {
+        return this._getByExpire(key, expire, "peekItem");
+    }
+
+    private _getByExpire(key: K, expire: number, action: "peekItem" | "getItem"): { value: T, validExpire: boolean } {
+        let item = this[action](key);
+
+        if (item === null) {
+            return null;
+        }
+
+        expire = expire || item.maxAge;
+
+        let ttl = item.ttl;
+
+        let dto = {
+            value: item.value,
+            validExpire: ttl >= (expire / 2)
+        };
+
+        if (!dto.validExpire) {
+            this.expire(key, expire);
+        }
+
+        return dto;
+    }
+
     public has(key: K): boolean {
         let item = this.getItem(key);
         return !!item
@@ -143,6 +174,8 @@ export class Cache<K, T> {
     public get size(): number {
         return this._size
     }
+
+
 
     private _del(item: ListItem<K, T>) {
         this._unlink(item);
