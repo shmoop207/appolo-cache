@@ -1,4 +1,7 @@
 # Appolo lru cache
+[![Build Status](https://travis-ci.org/shmoop207/appolo-cache.svg?branch=master)](https://travis-ci.org/shmoop207/appolo-cache) [![Dependencies status](https://david-dm.org/shmoop207/appolo-cache.svg)](https://david-dm.org/shmoop207/appolo-cache) [![NPM version](https://badge.fury.io/js/appolo-cache.svg)](https://badge.fury.io/js/appolo-cache)  [![npm Downloads](https://img.shields.io/npm/dm/appolo-cache.svg?style=flat)](https://www.npmjs.com/package/appolo-cache)
+[![Known Vulnerabilities](https://snyk.io/test/github/shmoop207/appolo-cache/badge.svg)](https://snyk.io/test/github/shmoop207/appolo-cache)
+
 Fast and simple lru cache for node.js written in typescript.
 
 The cache will remove the oldest used item when reached max capacity 
