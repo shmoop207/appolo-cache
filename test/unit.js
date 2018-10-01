@@ -180,7 +180,7 @@ describe("Cache", () => {
         cache.clear(2);
         cache.values().should.have.members(["C", "D"]);
     });
-    it.only('should  clear half', () => {
+    it('should  clear half', () => {
         let cache = new index_1.Cache({ maxSize: 10 });
         cache.set('a', 'A');
         cache.set('b', 'B');
