@@ -87,19 +87,23 @@ export class Cache<K, T> {
     public forEach(fn: (value: T, key: K) => void, $this?: any) {
 
         this._cache.forEach((item, key) => {
-            item = this.getItem(key);
+            item = this.peekItem(key);
             if (item) {
                 fn.call($this || null, item.value, item.key)
             }
         });
     }
 
-    public keys() {
+    public keys(): K[] {
         let output = [];
 
-        this.forEach((value: T, key) => {
-            output.push(key);
-        });
+        let keys = this._cache.keys();
+
+        for (let key of keys) {
+            if (this.peek(key)) {
+                output.push(key);
+            }
+        }
 
         return output;
     }
@@ -107,17 +111,26 @@ export class Cache<K, T> {
     public values(): T[] {
         let output = [];
 
-        this.forEach((value: T, key) => {
-            output.push(value);
-        });
+        let keys = this._cache.keys();
+
+        for (let key of keys) {
+
+            let value = this.peek(key);
+
+            if (value) {
+                output.push(value);
+            }
+        }
 
         return output;
     }
 
     public prune() {
-        let keys = this.keys();
-        for (let i = 0, len = keys.length; i < len; i++) {
-            this._isValidExpire(this._cache[keys[i]]);
+
+        let keys = this._cache.keys();
+
+        for (let key of keys) {
+            this._isValidExpire(this._cache.get(key));
         }
     }
 
@@ -174,7 +187,6 @@ export class Cache<K, T> {
     public get size(): number {
         return this._size
     }
-
 
 
     private _del(item: ListItem<K, T>) {
@@ -238,10 +250,6 @@ export class Cache<K, T> {
             this._unlink(item);
             this._link(item);
         }
-
-        // if (item.maxAge > 0) {
-        //     item.modified = Date.now();
-        // }
     }
 
     private _link(item: ListItem<K, T>) {
@@ -283,6 +291,17 @@ export class Cache<K, T> {
 
     public set maxAge(value: number) {
         this._maxAge = value;
+    }
+
+    public clear(n: number) {
+        this.prune();
+        for (let i = 0, len = n; i < len; i++) {
+            this.del(this._tail.key);
+        }
+    }
+
+    public clearHalf() {
+        this.clear(Math.floor(this._size / 2));
     }
 
 }

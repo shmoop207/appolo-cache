@@ -1,4 +1,4 @@
-import chai = require("chai")
+import chai = require("chai");
 import {Cache} from "../index"
 
 let should = chai.should();
@@ -77,7 +77,7 @@ describe("Cache", () => {
         cache.size.should.equal(3);
 
         setTimeout(() => {
-            cache.expire("b",150)
+            cache.expire("b", 150)
             cache.getItem("b").ttl.should.gt(3);
             cache.peek("a").should.equal("1");
         }, 15);
@@ -177,8 +177,8 @@ describe("Cache", () => {
         }, 100 * 7)
     })
 
-    it('should  reset',  ()=> {
-        let cache = new Cache({maxSize:10})
+    it('should  reset', () => {
+        let cache = new Cache({maxSize: 10})
         cache.set('a', 'A')
         cache.set('b', 'B')
         cache.reset()
@@ -186,5 +186,51 @@ describe("Cache", () => {
         should.not.exist(cache.get('a'))
         should.not.exist(cache.get('b'))
     })
+
+    it('should  get keys', () => {
+        let cache = new Cache({maxSize: 10})
+        cache.set('a', 'A')
+        cache.set('b', 'B')
+
+        cache.keys().should.have.members(["a", "b"])
+
+    })
+
+    it('should  get values', () => {
+        let cache = new Cache({maxSize: 10})
+        cache.set('a', 'A')
+        cache.set('b', 'B')
+
+        cache.values().should.have.members(["A", "B"])
+
+    })
+
+    it('should  clear', () => {
+        let cache = new Cache({maxSize: 10})
+        cache.set('a', 'A')
+        cache.set('b', 'B')
+        cache.set('c', 'C')
+        cache.set('d', 'D')
+
+        cache.clear(2)
+
+        cache.values().should.have.members(["C", "D"])
+
+    })
+
+    it.only('should  clear half', () => {
+        let cache = new Cache({maxSize: 10})
+        cache.set('a', 'A')
+        cache.set('b', 'B')
+        cache.set('c', 'C')
+        cache.set('d', 'D')
+        cache.set('f', 'F')
+
+        cache.clearHalf()
+
+        cache.values().should.have.members(["C", "D","F"])
+
+    })
+
 });
 

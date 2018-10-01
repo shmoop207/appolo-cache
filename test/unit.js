@@ -159,5 +159,36 @@ describe("Cache", () => {
         should.not.exist(cache.get('a'));
         should.not.exist(cache.get('b'));
     });
+    it('should  get keys', () => {
+        let cache = new index_1.Cache({ maxSize: 10 });
+        cache.set('a', 'A');
+        cache.set('b', 'B');
+        cache.keys().should.have.members(["a", "b"]);
+    });
+    it('should  get values', () => {
+        let cache = new index_1.Cache({ maxSize: 10 });
+        cache.set('a', 'A');
+        cache.set('b', 'B');
+        cache.values().should.have.members(["A", "B"]);
+    });
+    it('should  clear', () => {
+        let cache = new index_1.Cache({ maxSize: 10 });
+        cache.set('a', 'A');
+        cache.set('b', 'B');
+        cache.set('c', 'C');
+        cache.set('d', 'D');
+        cache.clear(2);
+        cache.values().should.have.members(["C", "D"]);
+    });
+    it.only('should  clear half', () => {
+        let cache = new index_1.Cache({ maxSize: 10 });
+        cache.set('a', 'A');
+        cache.set('b', 'B');
+        cache.set('c', 'C');
+        cache.set('d', 'D');
+        cache.set('f', 'F');
+        cache.clearHalf();
+        cache.values().should.have.members(["C", "D", "F"]);
+    });
 });
 //# sourceMappingURL=unit.js.map
