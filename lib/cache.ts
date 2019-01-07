@@ -164,7 +164,7 @@ export class Cache<K, T> {
 
         if (item) {
             item.value = value;
-            maxAge > 0 && (item.maxAge = maxAge);
+            maxAge != -1 && (item.maxAge = maxAge);
             this._hit(item);
             return;
         }
