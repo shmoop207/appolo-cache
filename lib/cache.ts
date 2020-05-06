@@ -53,13 +53,13 @@ export class Cache<K, T> {
         }
 
         expire = expire || item.maxAge;
-        refresh = refresh || (expire / 2)
-
         let ttl = item.ttl;
+        refresh = refresh || (expire / 2);
+        let liveTime = expire - ttl;
 
         let dto = {
             value: item.value,
-            validExpire: ttl >= refresh
+            validExpire: liveTime < refresh
         };
 
         if (!dto.validExpire) {

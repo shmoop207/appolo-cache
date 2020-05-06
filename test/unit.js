@@ -126,6 +126,19 @@ describe("Cache", () => {
             done();
         }, 25);
     });
+    it('should expire getByExpire', (done) => {
+        let cache = new index_1.Cache({
+            maxSize: 1,
+            maxAge: 100
+        });
+        cache.set('a', 'A');
+        setTimeout(function () {
+            let result = cache.getByExpire('a', 100);
+            result.validExpire.should.be.eq(false);
+            cache.ttl("a").should.be.eq(100);
+            done();
+        }, 55);
+    });
     it('should expire items', function (done) {
         let cache = new index_1.Cache({
             maxSize: 5,
