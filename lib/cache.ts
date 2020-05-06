@@ -37,15 +37,15 @@ export class Cache<K, T> {
         return this._get(key, true, false) as ListItem<K, T>
     }
 
-    public getByExpire(key: K, expire?: number): { value: T, validExpire: boolean } {
-        return this._getByExpire(key, expire, "getItem");
+    public getByExpire(key: K, expire?: number, refresh?: number): { value: T, validExpire: boolean } {
+        return this._getByExpire(key, expire, refresh, "getItem");
     }
 
-    public peekByExpire(key: K, expire?: number): { value: T, validExpire: boolean } {
-        return this._getByExpire(key, expire, "peekItem");
+    public peekByExpire(key: K, expire?: number, refresh?: number): { value: T, validExpire: boolean } {
+        return this._getByExpire(key, expire, refresh, "peekItem");
     }
 
-    private _getByExpire(key: K, expire: number, action: "peekItem" | "getItem"): { value: T, validExpire: boolean } {
+    private _getByExpire(key: K, expire: number, refresh: number, action: "peekItem" | "getItem"): { value: T, validExpire: boolean } {
         let item = this[action](key);
 
         if (item === null) {
@@ -53,12 +53,13 @@ export class Cache<K, T> {
         }
 
         expire = expire || item.maxAge;
+        refresh = refresh || (expire / 2)
 
         let ttl = item.ttl;
 
         let dto = {
             value: item.value,
-            validExpire: ttl >= (expire / 2)
+            validExpire: ttl >= refresh
         };
 
         if (!dto.validExpire) {
